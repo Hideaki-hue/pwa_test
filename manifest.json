@@ -10,7 +10,7 @@
     "display": "fullscreen",
     "icons": [
         {
-            "src": "images/icon512.jpg",
+            "src": "/images/icon_0.jpg",
             "sizes": "512x512"
         }
     ]
