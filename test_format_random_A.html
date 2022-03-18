@@ -281,7 +281,7 @@
         //問題選択ボタン
         function buttonClick3() {
             i = Number(document.getElementById("q_num").value) - 1;
-            if (!(i > 0 && i < data.length)) {
+            if (!(i >= 0 && i < data.length)) {
                 let alert_msg = "1から" + String(data.length) + "までの数値を入力してください。";
                 alert(alert_msg)
             }
