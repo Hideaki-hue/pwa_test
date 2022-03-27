@@ -84,8 +84,13 @@
             <label><input name="format" value="wrong" type="radio" onclick="buttonClick2('w');" disabled="disabled">間違えた問題</label>
         </div>
         <div class="row m-3 px-2">
-            <input class="col-6" id="q_num" type="number" min="1" placeholder="問題番号を入力">
-            <input id="btn4" class="col-sm-2 col-4" type="button" value="決定" onclick="buttonClick3();">
+            <div class="col-8">
+                <input class="col-8" id="q_num" type="number" min="1" placeholder="問題番号を入力">
+                <input class="col-3" id="btn4" type="button" value="決定" onclick="buttonClick3();">
+            </div>
+            <div class="col-2">
+                <input type="button" value="GoodNotes5" onclick="buttonClick4()">
+            </div>
         </div>
         <div id="text" class="shadow m-3 p-2 rounded-3">
             <p id="question"></p>
@@ -324,6 +329,9 @@
             document.getElementById("q_num").value = "";
         }
         
+        function buttonClick4() {
+            window.print();
+        }
         str_correct_rate.ondblclick = function() {
             let res = confirm('正解率をリセットしますか')
             if (res) {
