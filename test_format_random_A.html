@@ -62,6 +62,10 @@
             background-color: #f3b7cc;
             border-radius: 3px;
         }
+        #btn5 {
+            background-color: #98baf8;
+            border-radius: 3px;
+        }
     </style>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link rel="manifest" href="manifest.json">
@@ -76,6 +80,7 @@
         <div class="mx-3 px-2">
             <label><input name="format" value="random" type="radio" onclick="buttonClick2('r');">ランダム</label>
             <label><input name="format" value="orderd" type="radio" onclick="buttonClick2('o');">順番通り</label>
+            <label><input name="format" value="wrong" type="radio" onclick="buttonClick2('w');" disabled="disabled">間違えた問題</label>
         </div>
         <div class="row m-3 px-2">
             <input class="col-6" id="q_num" type="number" min="1" placeholder="問題番号を入力">
@@ -182,7 +187,7 @@
             if (onclick != "") { e.setAttribute("onclick", onclick) }
             return e
         }
-       
+        let str_correct_rate = document.getElementById("correct_rate")
         function reset() {
             yourChoices = [];
             q_and_a = data[i]
@@ -207,9 +212,10 @@
                 document.getElementById(elem).disabled = false
             }
         }
+        let your_wrong_questions = []
         //選択肢ボタン
-        function buttonClick(i) {
-            yourChoices.push(i);
+        function buttonClick(al) {
+            yourChoices.push(al);
             yourChoices.sort()
             let yourChoicesStr = yourChoices.join(', ')
             let answer_l = answer.split(', ')
@@ -217,23 +223,26 @@
             console.log(yourChoices.length)
             let yourChoicesLength = yourChoices.length
             document.getElementById("yourAnswer").innerHTML = "あなたの解答: " + yourChoicesStr
-            document.getElementById(i).disabled = true
+            document.getElementById(al).disabled = true
             if (yourChoicesLength != 0 && yourChoicesLength == answer_l.length) {
                 document.getElementById("correct_answer").innerHTML = "正解は" + answer
                 target1 = document.getElementById("judge")
                 if (yourChoicesStr == answer) {
                     target1.innerHTML = "正解です！"
                     o++;
+                    if (sessionStorage.getItem(i) != "") {
+                        sessionStorage.removeItem(i)
+                    }
                 } else {
                     target1.innerHTML = "不正解です..."
                     x++;
+                    sessionStorage.setItem(i, yourChoicesStr)
                 }
                 document.getElementById("explanation").innerHTML = explanation
                 let correct_rate = Math.round(o / (o + x) * 1000) / 10
                 let str1 = "今回の正答率は" + String(correct_rate) + "%です"
                 let str2 = "(" + String(o) + "問/" + String(o + x) + "問)"
                 let str3 = ""
-                let str_correct_rate = document.getElementById("correct_rate")
                 if (correct_rate < 60) {
                     str3 = "。( ; ; )"
                 } else if (correct_rate >= 60 && correct_rate < 80) {
@@ -251,6 +260,9 @@
         };
         //「次の問題」ボタン
         function buttonClick1() {
+            if (sessionStorage.length != 0) {
+                radio[2].removeAttribute('disabled')
+            }
             for (let j = 0; j < radio_len; j++) {
                 if (radio.item(j).checked) {
                     checkValue = radio.item(j).value;
@@ -258,6 +270,16 @@
             }
             if (checkValue == "random") {
                 i = getRandomInt(0, length)
+            } else if (checkValue == "wrong") {
+                i = sessionStorage.key(getRandomInt(0, sessionStorage.length))
+                if (sessionStorage.length == 0) {
+                    alert("間違えた問題はありません")
+                    radio.item(1).checked = true
+                    radio[2].setAttribute("disabled", "disabled")
+                    i = 0;
+                } else {
+                    alert("あと、" + String(sessionStorage.length) + "問です!")
+                }
             } else {
                 i++
                 if (i >= data.length) {
@@ -275,7 +297,17 @@
             if (s == "r") {
                 i = getRandomInt(0, data.length)
                 document.getElementById("q_num").value = "";
-            } 
+            } else if (s == "w") {
+                let k = getRandomInt(0, sessionStorage.length)
+                if (sessionStorage.length == 0) {
+                    alert("間違えた問題はありません")
+                    radio.item(1).checked = true
+                    radio[2].setAttribute("disabled", "disabled")
+                } else {
+                    alert("間違えた問題は、" + String(sessionStorage.length) + "問です!")
+                    i = sessionStorage.key(k)
+                }
+            }
             reset();
         }
         //問題選択ボタン
@@ -290,6 +322,15 @@
             radio.item(1).checked = true
             document.getElementById("q_num").value = "";
         }
+        
+        str_correct_rate.ondblclick = function() {
+            let res = confirm('正解率をリセットしますか')
+            if (res) {
+                o = 0;
+                x = 0;
+                document.getElementById("correct_rate").innerHTML = "";
+            }
+        };
         console.log("問題数は" + String(length) + "問です。")
     </script>
 
