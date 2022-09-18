@@ -514,13 +514,13 @@
     },
     {
         "QuestionNumber": "B41",
-        "Question": "41. 59歳の男性。8月初旬の昼過ぎ、救急外来に日本語の話せない外国人男性が救急車で搬入された。救急車で同行した配偶者（外国人）が病院の臨床修練外国医師に話した内容と患者の所見をまとめた診療記録を示す。Thepatient felt faint while walking on the beach. He then sat under a shade where he vomited. He complained ofheadache and dizziness before fainting. His face turned red and her breathing became rapid. Physical examination・Body temperature：38.6℃. ・ Conscious level：Glasgow Coma Scale E3 V4 M5. ・ Skin：generally hot, flushed",
+        "Question": "41. 59歳の男性。8月初旬の昼過ぎ、救急外来に日本語の話せない外国人男性が救急車で搬入された。救急車で同行した配偶者（外国人）が病院の臨床修練外国医師に話した内容と患者の所見をまとめた診療記録を示す。Thepatient felt faint while walking on the beach. He then sat under a shade where he vomited. He complained ofheadache and dizziness before fainting. His face turned red and her breathing became rapid. Physical examination・Body temperature：38.6℃. ・ Conscious level：Glasgow Coma Scale E3 V4 M5. ・ Skin：generally hot, flushed and dry. ・ Heart rate：120/min, regular. Blood pressure：94/60mmHg. Respiratory rate：24/min, shallow. ・ Nohemiplegia. ・ Muscle spasms in limbs.まず行うべきなのはどれか。",
         "Choices": {
-            "a": "a. d dry. ・ Heart rate：120/min, regular. Blood pressure：94/60mmHg. Respiratory rate：24/min, shallow. ・ No\nhemiplegia. ・ Muscle spasms in limbs.まず行うべきなのはどれか。",
-            "b": "b.  酸素吸入",
-            "c": "c.  全身の冷却",
-            "d": "d.  解熱薬の投与",
-            "e": "e.  抗菌薬の投与"
+            "a": "a.  酸素吸入",
+            "b": "b.  全身の冷却",
+            "c": "c.  解熱薬の投与",
+            "d": "d.  抗菌薬の投与",
+            "e": "e.  昇圧剤の投与"
         },
         "Answer": "b",
         "Explanation": ""
